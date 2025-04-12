@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
@@ -20,23 +20,26 @@ export class EmployeeListComponent {
   isAdding = false;
   isEditing = false;
   defaultAvatar = 'assets/avatars/boys/boy1.png'; // Example default
-  handleImageError(event: Event, gender: 'male' | 'female') {
-    const img = event.target as HTMLImageElement;
-    console.warn(`Failed to load avatar: ${img.src}`);
-    
-    // Fallback to gender-specific default
-    img.src = gender === 'male' 
-      ? 'assets/avatars/boys/boy1.png' 
-      : 'assets/avatars/girls/girl1.jpg';
-  }
+ 
   constructor() {
     this.employees$ = this.employeeService.getEmployees();
-    this.employees$.subscribe(employees => {
-      employees.forEach(emp => {
-        console.log('Employee avatar path:', emp.avatarUrl);
-      });
-    });
+    
   }
+  ngOnInit() {
+    // For debugging only - can be removed in production
+    if (typeof window !== 'undefined') {
+      console.log('Current localStorage:', 
+        localStorage.getItem('employee-management-data'));
+    }
+  }
+
+  
+handleImageError(event: Event) {
+  console.log('Image load error, using fallback avatar');
+  const img = event.target as HTMLImageElement;
+  img.src = this.defaultAvatar;
+  img.onerror = null;
+}
 
   onAdd() {
     this.isAdding = true;
@@ -68,4 +71,14 @@ export class EmployeeListComponent {
     }
     this.onCancel();
   }
+  // Add to employee-list.component.ts
+clearStorage() {
+  if (confirm('⚠️ Warning! This will permanently delete ALL employee data. Continue?')) {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('employee-management-data');
+    
+      window.location.reload();
+    }
+  }
+}
 }

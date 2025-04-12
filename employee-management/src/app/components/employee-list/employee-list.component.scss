@@ -115,6 +115,14 @@
               background: #d32f2f;
             }
           }
+          &.danger {
+            background: #5350ef;
+            color: white;
+  
+            &:hover {
+              background: #d32f2f;
+            }
+          }
         }
       }
     }

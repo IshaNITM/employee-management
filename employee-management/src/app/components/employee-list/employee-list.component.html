@@ -2,6 +2,7 @@
     <header>
       <h1>Employee Management</h1>
       <button (click)="onAdd()">Add Employee</button>
+      <button (click)="clearStorage()" class="danger">Clear Storage </button>
     </header>
   
     <app-employee-form 
@@ -10,14 +11,14 @@
       (submitForm)="onSubmit($event)"
       (cancel)="onCancel()">
     </app-employee-form>
-  
+    
     <div class="employee-grid">
       <div *ngFor="let employee of employees$ | async" class="employee-card">
         <img [src]="employee.avatarUrl" 
-     alt="{{employee.name}}'s Avatar" 
-     class="avatar"
-     (error)="handleImageError($event)"
-     loading="lazy">
+        alt="{{employee.name}}'s Avatar" 
+        class="avatar"
+        (error)="handleImageError($event)"
+        loading="lazy">
         <div class="details">
           <h3>{{ employee.name }}</h3>
           <p>{{ employee.designation }} at {{ employee.companyName }}</p>
@@ -27,7 +28,12 @@
         <div class="actions">
           <button (click)="onEdit(employee)">Edit</button>
           <button (click)="onDelete(employee.id)" class="delete">Delete</button>
-        </div>
+        <!-- Add to your employee-list.component.html -->
+
+</div>
+
       </div>
+      
     </div>
+   
   </div>
