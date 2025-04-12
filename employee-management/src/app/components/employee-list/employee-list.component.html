@@ -13,7 +13,11 @@
   
     <div class="employee-grid">
       <div *ngFor="let employee of employees$ | async" class="employee-card">
-        <img [src]="employee.avatarUrl" alt="Employee Avatar" class="avatar">
+        <img [src]="employee.avatarUrl" 
+     alt="{{employee.name}}'s Avatar" 
+     class="avatar"
+     (error)="handleImageError($event)"
+     loading="lazy">
         <div class="details">
           <h3>{{ employee.name }}</h3>
           <p>{{ employee.designation }} at {{ employee.companyName }}</p>

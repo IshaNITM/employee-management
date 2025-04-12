@@ -17,10 +17,12 @@ export class EmployeeFormComponent {
   @Output() cancel = new EventEmitter<void>();
 
   form: FormGroup;
+  genders = ['male', 'female']; 
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       name: ['', Validators.required],
+      gender: ['male', Validators.required],
       companyName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contactNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
@@ -32,6 +34,7 @@ export class EmployeeFormComponent {
     if (this.employee) {
       this.form.patchValue({
         name: this.employee.name,
+        gender: this.employee.gender,
         companyName: this.employee.companyName,
         email: this.employee.email,
         contactNo: this.employee.contactNo,

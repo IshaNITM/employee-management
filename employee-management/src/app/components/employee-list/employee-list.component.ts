@@ -19,9 +19,23 @@ export class EmployeeListComponent {
   selectedEmployee: Employee | undefined;
   isAdding = false;
   isEditing = false;
-
+  defaultAvatar = 'assets/avatars/boys/boy1.png'; // Example default
+  handleImageError(event: Event, gender: 'male' | 'female') {
+    const img = event.target as HTMLImageElement;
+    console.warn(`Failed to load avatar: ${img.src}`);
+    
+    // Fallback to gender-specific default
+    img.src = gender === 'male' 
+      ? 'assets/avatars/boys/boy1.png' 
+      : 'assets/avatars/girls/girl1.jpg';
+  }
   constructor() {
     this.employees$ = this.employeeService.getEmployees();
+    this.employees$.subscribe(employees => {
+      employees.forEach(emp => {
+        console.log('Employee avatar path:', emp.avatarUrl);
+      });
+    });
   }
 
   onAdd() {
