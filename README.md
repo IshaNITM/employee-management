@@ -65,5 +65,20 @@ Open your browser at http://localhost:4200
 Testing
 The application includes basic unit tests. Run them with:
 ![image](https://github.com/user-attachments/assets/863fcc9b-1e67-4cfc-a63c-17a6dabcbce3)
+![image](https://github.com/user-attachments/assets/853775fe-90f5-414a-93fd-ba1ba8cc09ae)
+
+
+Deploy
+https://ishanitm.github.io/employee-management/
+Code Quality Highlights
+DRY Principle: Reusable components and services
+
+Type Safety: Strong typing throughout the application
+
+Separation of Concerns: Clear division between components, services, and models
+
+Error Handling: Graceful fallbacks for avatar loading
+
+Performance: Observable-based data flow with BehaviorSubject
 
 
